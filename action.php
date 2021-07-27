@@ -5,10 +5,10 @@ ini_set('display_errors', 1);
 
 // required libs
 require_once __DIR__ . '/src/new-guichet.php';
-include('commande.php');
+//include('commande.php');
 
 // This class manage "Commande" table in DB
-$commande = new Commande();
+//$commande = new Commande();
 try {
     if(isset($_POST['valider']))
     {
@@ -37,10 +37,6 @@ try {
     $return_url = 'https://support.cinetpay.com/';
     //Channel list
     $channels = "ALL";
-    // fill command class
-    $commande->get_transactionId($id_transaction);
-    $commande->setMontant($amount);
-    
        
     // create for newGuichet
     $formData = array(
@@ -55,7 +51,7 @@ try {
         "channels" => $channels
     );
     // save transaction in db
-     $commande->create($formData);
+    // $commande->create($formData);
 
     $CinetPay = new CinetPay($site_id, $apikey, $version);
     $result = $CinetPay->generatePaymentLink($formData);
@@ -63,27 +59,7 @@ try {
     if ($result["code"] == '201')
     {
         $url = $result["data"]["payment_url"];
-        //mise à jour de la base de donné
-        $updateBd = array(
-            "code" => $result["code"],
-            "message" => $result["message"],
-            "payment_token" => $result["data"]["payment_token"],
-            "payment_url" => $url,
-            "api_response_id" => $result["api_response_id"],
-            "transaction_id"=> $id_transaction
-
-        );
-        include ('connection.php');
-        // Mise à jour d'une ligne spécifique
-        try {
-            //code...
-        $req = $bdd->prepare('UPDATE commande SET code = :code, message = :message,payment_token = :payment_token, payment_url = :payment_url,api_response_id = :api_response_id WHERE transaction_id = :transaction_id ');
-        
-        $req->execute($updateBd);
-        
-        } catch (Exception $e) {
-            echo $e->getMessage();
-        }
+       
         //redirection vers l'url
         header('Location:'.$url);
         
