@@ -189,8 +189,9 @@
       }
       
       //send datas
-      private function callCinetpayWsMethod($params, $url, $method = 'POST')
+      private function callCinetpayWsMethod($data, $url, $method = 'POST')
       {
+        $params = json_encode($data);
           if (function_exists('curl_version')) {
               try {
                   $curl = curl_init();
@@ -203,7 +204,7 @@
                       CURLOPT_TIMEOUT => 45,
                       CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
                       CURLOPT_CUSTOMREQUEST => $method,
-                      CURLOPT_POSTFIELDS => json_encode($params),
+                      CURLOPT_POSTFIELDS => $params,
                       CURLOPT_HTTPHEADER => array(
                           "content-type:application/json"
                       ),
