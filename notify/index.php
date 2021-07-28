@@ -4,7 +4,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 //check if there is a cinetpay post value
-if (isset($_POST['transaction_id'])) {
+if (isset($_POST['cpm_trans_id'])) {
     echo "C'est ok";
     // call required lib
     require_once __DIR__ . '/../src/new-guichet.php';
@@ -15,7 +15,7 @@ if (isset($_POST['transaction_id'])) {
     $commande = new Commande();
     try {
         // cinetpay class initialisation and transaction identify
-        $id_transaction = $_POST['transaction_id'];
+        $id_transaction = $_POST['cpm_trans_id'];
         // enter apiKey
         $apikey = "12912847765bc0db748fdd44.40081707";
         //enter siteId
