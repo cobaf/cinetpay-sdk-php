@@ -1,12 +1,13 @@
 <?php
 
-echo "pas bonjjhjnj";
+echo "pas bon";
 var_dump($_POST);
 foreach ($_POST as $key => $value) {
     echo $key . ' '. $value;
 }
 //check if there is a cinetpay post value
 if (isset($_POST['cpm_trans_id'])) {
+    try {
 
     echo "C'est ok";
     // call required lib
@@ -16,7 +17,6 @@ if (isset($_POST['cpm_trans_id'])) {
     require_once __DIR__ . '/../commande.php';
 
     $commande = new Commande();
-    try {
         // cinetpay class initialisation and transaction identify
         $id_transaction = $_POST['cpm_trans_id'];
         // enter apiKey
@@ -66,7 +66,10 @@ if (isset($_POST['cpm_trans_id'])) {
         echo "1"; // a retirer
     } catch (Exception $e) {
         echo "Erreur :" . $e->getMessage();
+        echo PHP_EOL;
+        echo json_encode($e);
     }
 } else {
+    echo "trop pas bon";
     // direct acces on IPN
 }
