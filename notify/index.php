@@ -1,6 +1,6 @@
 <?php
 
-echo "pas bon";
+echo "pas bonjjhjnj";
 //check if there is a cinetpay post value
 if (isset($_POST['cpm_trans_id'])) {
     echo "C'est ok";
