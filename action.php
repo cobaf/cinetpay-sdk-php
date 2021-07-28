@@ -5,10 +5,10 @@ ini_set('display_errors', 1);
 
 // required libs
 require_once __DIR__ . '/src/new-guichet.php';
-//include('commande.php');
+include('commande.php');
 
 // This class manage "Commande" table in DB
-//$commande = new Commande();
+$commande = new Commande();
 try {
     if(isset($_POST['valider']))
     {
