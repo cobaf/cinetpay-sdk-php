@@ -14,23 +14,18 @@ class Commande
     protected $_number;
     protected $_prefix;
     protected $_api_response_id;
+    protected $_payment_token;
 
-    public function create($data)
+    public function create()
     {
-        include ('connection.php');
         // Enregister la ligne pour la première fois
-        $req = $bdd->prepare('INSERT INTO commande(transaction_id,amount,currency,customer_surname,customer_name,description,notify_url,return_url,channels) 
-                     VALUES( :transaction_id, :amount, :currency, :customer_surname, :customer_name, :description, :notify_url, :return_url, :channels)');
-        $req->execute($data);
 
     }
 
-    public function update($updateBd)
+    public function update()
     {
-        include ('connection.php');
         // Mise à jour d'une ligne spécifique
-        $req = $bdd->prepare('UPDATE commande SET code = :code, message = :message, payment_token = :payment_token, payment_url = :payment_url, api_response_id = :api_response_id WHERE transaction_id = :transaction_id ');
-        $req->execute($updateBd);
+        
     }
 
     public function getCommandeByTransId()
@@ -275,6 +270,25 @@ class Commande
     public function set_api_response_id($_api_response_id)
     {
         $this->_api_response_id = $_api_response_id;
+
+        return $this;
+    }
+        /**
+     * Get the value of _payment_token
+     */ 
+    public function get_payment_token()
+    {
+        return $this->_payment_token;
+    }
+
+    /**
+     * Set the value of _payment_token
+     *
+     * @return  self
+     */ 
+    public function set_payment_token($_payment_token)
+    {
+        $this->_payment_token = $_payment_token;
 
         return $this;
     }

@@ -32,9 +32,9 @@ try {
     //version
     $version = "V2";
     //notify url
-    $notify_url = 'https://support.cinetpay.com/';
+    $notify_url = 'http://15.188.62.100/cinetpay-sdk-php/notify';
     //return url
-    $return_url = 'https://support.cinetpay.com/';
+    $return_url = 'http://15.188.62.100/cinetpay-sdk-php/return';
     //Channel list
     $channels = "ALL";
        
@@ -51,7 +51,7 @@ try {
         "channels" => $channels
     );
     // save transaction in db
-    // $commande->create($formData);
+     $commande->create();
 
     $CinetPay = new CinetPay($site_id, $apikey, $version);
     $result = $CinetPay->generatePaymentLink($formData);
@@ -59,7 +59,9 @@ try {
     if ($result["code"] == '201')
     {
         $url = $result["data"]["payment_url"];
-       
+
+       // update transaction in db
+        $commande->update();
         //redirection vers l'url
         header('Location:'.$url);
         

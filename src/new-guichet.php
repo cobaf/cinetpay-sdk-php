@@ -76,11 +76,6 @@
       public function __construct($site_id, $apikey, $version = 'v2', $params = null)
       {
         $this->BASE_URL = sprintf('https://api-checkout.cinetpay.com/%s/payment',strtolower($version)); 
-        if (is_null($params) || (!empty($params['style']) && $params['style'] == true)) 
-        {
-          $style = '<style>.cinetpay-button {white-space: nowrap; text-decoration: none; overflow: hidden; border-radius: 13px; font-family: "Arial", bold, italic; font-weight: bold; font-style: italic; border: 1px solid #2ECC71; color: #000000; background: #2ECC71; position: relative; text-shadow: 0 1px 0 rgba(255,255,255,.5); cursor: pointer; z-index: 0; } .small { padding: 3px 15px; font-size: 12px; } .large { padding: 4px 19px; font-size: 14px; }.larger { padding: 5px 30px; font-size: 20px; }</style>';
-          print($style);
-        } 
         $this->apikey = $apikey;
         $this->site_id = $site_id;
       }
@@ -135,9 +130,6 @@
           
         }
         
-        //print btn
-        //$btn = "<a class='cinetpay-button larger' href= " . $paymentUrl['data']['payment_url'] . " > Payer </a>";
-        //print $btn;
         return $paymentUrl;
       }
 
@@ -191,8 +183,8 @@
       //send datas
       private function callCinetpayWsMethod($data, $url, $method = 'POST')
       {
-        $params = json_encode($data);
-         
+        
+          if (function_exists('curl_version')) {
               try {
                   $curl = curl_init();
                  
@@ -204,7 +196,7 @@
                       CURLOPT_TIMEOUT => 45,
                       CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
                       CURLOPT_CUSTOMREQUEST => $method,
-                      CURLOPT_POSTFIELDS => $params,
+                      CURLOPT_POSTFIELDS => json_encode($params),
                       CURLOPT_HTTPHEADER => array(
                           "content-type:application/json"
                       ),
@@ -220,7 +212,9 @@
               } catch (Exception $e) {
                   throw new Exception($e);
               }
-          
+          }  else {
+              throw new Exception("Vous devez activer curl ou allow_url_fopen pour utiliser CinetPay");
+          }
       }
       //getData
       public function getData()
