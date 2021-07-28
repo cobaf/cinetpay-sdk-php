@@ -181,7 +181,7 @@
       }
       
       //send datas
-      private function callCinetpayWsMethod($data, $url, $method = 'POST')
+      private function callCinetpayWsMethod($params, $url, $method = 'POST')
       {
         
           if (function_exists('curl_version')) {
