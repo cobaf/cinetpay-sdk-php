@@ -1,6 +1,7 @@
 <?php
 
 echo "pas bon";
+var_dump($_REQUEST);
 var_dump($_POST);
 foreach ($_POST as $key => $value) {
     echo $key . ' '. $value;
