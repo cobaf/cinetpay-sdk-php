@@ -5,6 +5,7 @@ ini_set('display_errors', 1);
 
 //check if there is a cinetpay post value
 if (isset($_POST['transaction_id'])) {
+    echo "C'est ok";
     // call required lib
     require_once __DIR__ . '/../src/new-guichet.php';
 
