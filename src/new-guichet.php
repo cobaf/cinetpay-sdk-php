@@ -192,7 +192,7 @@
       private function callCinetpayWsMethod($data, $url, $method = 'POST')
       {
         $params = json_encode($data);
-          if (function_exists('curl_version')) {
+         
               try {
                   $curl = curl_init();
                  
@@ -220,33 +220,7 @@
               } catch (Exception $e) {
                   throw new Exception($e);
               }
-          } else if (ini_get('allow_url_fopen')) {
-              try {
-                  // Build Http query using params
-                  $query = http_build_query($params);
-                  // Create Http context details
-                  $options = array(
-                      'http' => array(
-                          'header' => "Content-Type: application/json\r\n" .
-                              "Content-Length: " . strlen($query) . "\r\n" .
-                              "User-Agent:MyAgent/1.0\r\n",
-                          'method' => "POST",
-                          'content' => $query,
-                      ),
-                  );
-                  // Create context resource for our request
-                  $context = stream_context_create($options);
-                  // Read page rendered as result of your POST request
-                  $result = file_get_contents(
-                      $url, // page url
-                      false, $context);
-                  return trim($result);
-              } catch (Exception $e) {
-                  throw new Exception($e);
-              }
-          } else {
-              throw new Exception("Vous devez activer curl ou allow_url_fopen pour utiliser CinetPay");
-          }
+          
       }
       //getData
       public function getData()
