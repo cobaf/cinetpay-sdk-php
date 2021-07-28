@@ -1,8 +1,6 @@
 <?php
-// IPN acces for payment validation
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
 
+echo "pas bon";
 //check if there is a cinetpay post value
 if (isset($_POST['cpm_trans_id'])) {
     echo "C'est ok";
