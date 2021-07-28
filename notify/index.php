@@ -1,12 +1,13 @@
 <?php
 
 echo "pas bonjjhjnj";
+var_dump($_POST);
+foreach ($_POST as $key => $value) {
+    echo $key . ' '. $value;
+}
 //check if there is a cinetpay post value
 if (isset($_POST['cpm_trans_id'])) {
-    var_dump($_POST);
-    foreach ($_POST as $key => $value) {
-        echo $key . ' '. $value;
-    }
+
     echo "C'est ok";
     // call required lib
     require_once __DIR__ . '/../src/new-guichet.php';
