@@ -1,7 +1,7 @@
 <?php
-//Commenter ses deux lines si vous êtes en production
+/*Commenter ses deux lines si vous êtes en production
 error_reporting(E_ALL);
-ini_set('display_errors', 1);
+ini_set('display_errors', 1);*/
 
 // required libs
 require_once __DIR__ . '/src/new-guichet.php';
@@ -32,9 +32,9 @@ try {
     //version
     $version = "V2";
     //notify url
-    $notify_url = 'http://15.188.62.100/cinetpay-sdk-php/notify';
+    $notify_url = 'http://15.188.62.100/cinetpay-sdk-php/notify';//'http://cinetpay-sdk-php/notify';
     //return url
-    $return_url = 'http://15.188.62.100/cinetpay-sdk-php/return';
+    $return_url = 'http://15.188.62.100/cinetpay-sdk-php/return';//'http://cinetpay-sdk-php/return';
     //Channel list
     $channels = "ALL";
        

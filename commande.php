@@ -33,6 +33,11 @@ class Commande
         // Recuperation d'une commande par son $_transId
     }
 
+    public function getUserByPayment()
+    {
+        // Recuperation d'un utilisation par son $_payment_token
+    }
+    
     /**
      * @return mixed
      */
