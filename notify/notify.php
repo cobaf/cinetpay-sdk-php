@@ -17,7 +17,7 @@ if (isset($_POST['cpm_trans_id'])) {
         //enter siteId
         $site_id = "445160";
         //version 
-        $version = "V1";
+        $version = "V2";
 
         $CinetPay = new CinetPay($site_id, $apikey, $version);
         // get actual transaction's status in your db
