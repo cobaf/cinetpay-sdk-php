@@ -48,7 +48,16 @@ try {
         "description"=> $description,
         "notify_url" => $notify_url,
         "return_url" => $return_url,
-        "channels" => $channels
+        "channels" => $channels,
+        //pour afficher le paiement par carte de credit
+        "alternative_currency" => "EUR",
+        "customer_email" => "test@cinetpay.com",
+        "customer_phone_number" => "0505050505",
+        "customer_address" => "BP 258",
+        "customer_city" => "ABIDJAN",
+        "customer_country" => "US",
+        "customer_state" => "AZ",
+        "customer_zip_code" => "00225"
     );
     // save transaction in db
      $commande->create();
