@@ -1,6 +1,5 @@
 
 <?php 
-print_r($_POST);
 //check if there is a cinetpay post value
 if (isset($_POST['cpm_trans_id'])) {
     try {
@@ -18,7 +17,7 @@ if (isset($_POST['cpm_trans_id'])) {
         //enter siteId
         $site_id = "445160";
         //version 
-        $version = "V2";
+        $version = "V1";
 
         $CinetPay = new CinetPay($site_id, $apikey, $version);
         // get actual transaction's status in your db
