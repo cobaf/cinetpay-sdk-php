@@ -38,14 +38,32 @@ function ip_visitor_country()
     $ip_data = json_decode($ip_data_in,true);
     $ip_data = str_replace('&quot;', '"', $ip_data); // for PHP 5.2 see stackoverflow.com/questions/3110487/
 
-    if($ip_data && $ip_data['geoplugin_countryName'] != null) {
-        $country = $ip_data['geoplugin_countryName'];
+    if($ip_data && $ip_data['geoplugin_countryCode'] != null) {
+        $country = $ip_data['geoplugin_countryCode'];
     }
 
-    return 'IP: '.$ip.' # Country: '.$country;
+    return $country;
 }
-
-echo ip_visitor_country(); // output Coutry name
+ function getCurrency($currency)
+{
+    $CurrencyCode =[
+         "CI" =>"XOF",
+            "CG" =>"CDF",
+            "CD" =>"CDF",
+            "TG" =>"XOF",
+            "CM" =>"XAF",
+            "SN" =>"XOF",
+            "BF" =>"XOF",
+            "ML" =>"XOF",
+            "GN" =>"GNF",
+    ];
+    if(empty($CurrencyCode[$currency]))
+    {
+        return "XOF";
+    }
+    return $CurrencyCode[$currency];
+}
+echo getCurrency($country); // output Country currency
 die();
 $commande = new Commande();
 try {
