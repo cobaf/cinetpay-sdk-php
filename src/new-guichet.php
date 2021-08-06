@@ -58,6 +58,7 @@
       public $customer_zip_code = null; 
 
       //variables des payments check
+      public $token = null;
       public $chk_payment_date = null;
       public $chk_operator_id = null;
       public $chk_payment_method = null;
@@ -108,7 +109,7 @@
       if (!empty($param['customer_country']))  $this->customer_country = $param['customer_country'];
       if (!empty($param['customer_state']))  $this->customer_state = $param['customer_state'];
       if (!empty($param['customer_zip_code']))  $this->customer_zip_code = $param['customer_zip_code'];
-      if (!empty($param['metadata']))  $this->customer_zip_code = $param['metadata'];
+      if (!empty($param['metadata']))  $this->metadata = $param['metadata'];
         //soumission des donnees
         $data = $this->getData();
         
@@ -154,7 +155,7 @@
           if (empty($param['description']))
           throw new Exception("Erreur: description non defini");
           if (empty($param['customer_surname']))
-          throw new Exception("Erreur: Customer_name non defini");
+          throw new Exception("Erreur: Customer_surname non defini");
           if (empty($param['notify_url']))
           throw new Exception("Erreur: notify_url non defini");
           if (empty($param['return_url']))
@@ -303,6 +304,12 @@
       public function setTransId($id)
       {
           $this->transaction_id = $id;
+          return $this;
+      }
+
+      public function setToken($token)
+      {
+          $this->token= $token;
           return $this;
       }
 

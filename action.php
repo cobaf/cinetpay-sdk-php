@@ -57,7 +57,7 @@ try {
         "customer_city" => "ABIDJAN",
         "customer_country" => "US",
         "customer_state" => "AZ",
-        "customer_zip_code" => "00225"
+        "customer_zip_code" => "+225"
     );
     // save transaction in db
      $commande->create();
