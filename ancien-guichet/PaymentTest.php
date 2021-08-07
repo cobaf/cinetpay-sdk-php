@@ -12,14 +12,14 @@ $cpm_site_id = '445160';//demo cinetpay
 //Post Parameters
 $cpm_version = 'v1';
 $cpm_language = 'fr';
-$cpm_currency = 'XOF'; // value can also be : XOF, XAF, CDF, GNF
+$cpm_currency = $_POST['currency']; // value can also be : XOF, XAF, CDF, GNF
 $cpm_page_action = 'PAYMENT';
 $cpm_payment_config = 'SINGLE';
 $cpSecure = "https://secure.cinetpay.com";
 $signatureUrl = "https://api.cinetpay.com/v1/?method=getSignatureByPost";
 /////////////////////////////
 
-$cpm_amount = '100'; //Le montant de la transaction
+$cpm_amount = $_POST['amount']; //Le montant de la transaction
 $cpm_custom = ''; // Toutes information qui pourrais vous servir
 $cpm_designation = 'PAIEMENTTEST'; //Le produit acheter
 
@@ -75,8 +75,6 @@ if ($result === false) {
     \header($return_url);
     exit();
 }
-var_dump($getSignatureData);
-echo("\n");
 $signature = json_decode($result);
 var_dump($signature);
 
@@ -86,18 +84,19 @@ var_dump($signature);
 <html>
 
 <body>
+    <p>Veuillez patientez...</p>
     <form action="<?php echo $cpSecure; ?>" method="post" id="cinetPayForm">
         <input type="hidden" value="<?php echo $apikey; ?>" name="apikey">
         <input type="hidden" value="<?php echo $cpm_custom; ?>" name="cpm_custom">
-        <p><input type="text" value="<?php echo $cpm_amount; ?>" name="cpm_amount"></p>
+        <p><input type="hidden" value="<?php echo $cpm_amount; ?>" name="cpm_amount"></p>
         <input type="hidden" value="<?php echo $cpm_site_id; ?>" name="cpm_site_id">
-        <p><input type="text" value="<?php echo $cpm_currency; ?>" name="cpm_currency"></p>
+        <p><input type="hidden" value="<?php echo $cpm_currency; ?>" name="cpm_currency"></p>
         <input type="hidden" value="<?php echo $cpm_version; ?>" name="cpm_version">
         <input type="hidden" value="<?php echo $cpm_trans_id; ?>" name="cpm_trans_id">
         <input type="hidden" value="<?php echo $cpm_language; ?>" name="cpm_language">
         <input type="hidden" value="<?php echo $getSignatureData['cpm_trans_date']; ?>" name="cpm_trans_date">
         <input type="hidden" value="<?php echo $cpm_page_action; ?>" name="cpm_page_action">
-        <p><input type="text" name="cpm_designation"> </p>
+        <p><input type="hidden" name="cpm_designation"> </p>
         <input type="hidden" value="<?php echo $cpm_payment_config; ?>" name="cpm_payment_config">
 <input type="hidden" value="<?php echo $cpm_payment_config; ?>" name="cpm_payment_config">
 <!--   <input type="text" value="0198757845" name="cel_phone_num">
@@ -107,10 +106,10 @@ var_dump($signature);
         <input type="hidden" value="<?php echo $cancel_url; ?>" name="cancel_url">
         <input type="hidden" value="<?php echo $notify_url; ?>" name="notify_url">
        <input type="hidden" value="<?php echo $debug; ?>" name="debug">
-       <input type="hidden" value="123456" name="token">
-       <input type="hidden" value="123456" name="test1">
-       <input type="hidden" value="123456" name="test2">
-        <input type="submit" value="Valider">
+     <!--    <input type="submit" value="Valider"> -->
     </form>
+    <script>
+        document.getElementById("cinetPayForm").submit();
+    </script>
 </body>
 </html>
