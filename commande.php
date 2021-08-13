@@ -16,6 +16,11 @@ class Commande
     protected $_api_response_id;
     protected $_payment_token;
 
+    public function getCurrentUrl()
+    {
+       return  $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/";
+        
+    }
     public function create()
     {
         // Enregister la ligne pour la première fois

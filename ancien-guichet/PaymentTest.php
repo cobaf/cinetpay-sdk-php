@@ -23,14 +23,15 @@ $cpm_amount = $_POST['amount']; //Le montant de la transaction
 $cpm_custom = ''; // Toutes information qui pourrais vous servir
 $cpm_designation = 'PAIEMENTTEST'; //Le produit acheter
 
-
 $cpm_trans_date = date("Y-m-d H:i:s");
 $cpm_trans_id = 'TEST-' . (string)date("YmdHis"); // ID d la transaction
+
+$actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/";
 //notify url
-$notify_url = 'http://15.188.62.100/cinetpay-sdk-php/notify/notify.php';
+$notify_url = $actual_link.'cinetpay-sdk-php/notify/notify.php';
 //return url
-$return_url = 'http://15.188.62.100/cinetpay-sdk-php/return/return.php';
-$cancel_url = "https://exemple.net/cancel";
+$return_url = $actual_link.'cinetpay-sdk-php/return/return.php';
+$cancel_url = $actual_link.'cinetpay-sdk-php/';
 $debug = 1;
 
 
@@ -49,7 +50,7 @@ $getSignatureData = array(
     'cpm_designation' => "",
     'cpm_payment_config' => $cpm_payment_config,
     'update_time' => 10,
-    'notify_url' => 'http://15.188.62.100/cinetpay-sdk-php/notify/notify.php'
+    'notify_url' => $actual_link.'notify/notify.php'
     
     /* 'cel_phone_num' => '0198757845',
     'cpm_phone_prefixe' => '225',  */

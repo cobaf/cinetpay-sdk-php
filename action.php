@@ -32,9 +32,9 @@ try {
     //version
     $version = "V2";
     //notify url
-    $notify_url = 'http://15.188.62.100/cinetpay-sdk-php/notify/notify.php';//'http://cinetpay-sdk-php/notify';
+    $notify_url = $commande->getCurrentUrl().'cinetpay-sdk-php/notify/notify.php';//'http://cinetpay-sdk-php/notify';
     //return url
-    $return_url = 'http://15.188.62.100/cinetpay-sdk-php/return/return.php';//'http://cinetpay-sdk-php/return';
+    $return_url = $commande->getCurrentUrl().'cinetpay-sdk-php/return/return.php';//'http://cinetpay-sdk-php/return';
     //Channel list
     $channels = "ALL";
        

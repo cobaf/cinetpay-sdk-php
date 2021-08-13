@@ -12,7 +12,7 @@
         <option value="CDF">CDF</option>
         <option value="GNF">GNF</option>
       </select>
-      <input type="submit" value="Soumettre">
+      <input type="submit" value="Valider">
      </form>
 
  </body>
