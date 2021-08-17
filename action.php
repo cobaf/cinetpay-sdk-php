@@ -26,9 +26,9 @@ try {
     //
    
     //Veuillez entrer votre apiKey
-    $apikey = "5033845660e8c7cc5d9662.25574082";//"12912847765bc0db748fdd44.40081707";
+    $apikey = "12912847765bc0db748fdd44.40081707";
     //Veuillez entrer votre siteId
-    $site_id = "328958";//"445160";
+    $site_id = "445160";
     //version
     $version = "V2";
     //notify url
@@ -57,7 +57,7 @@ try {
         "customer_city" => "ABIDJAN",
         "customer_country" => "US",
         "customer_state" => "AZ",
-        "customer_zip_code" => "+225"
+        "customer_zip_code" => "00225"
     );
     // save transaction in db
      $commande->create();
