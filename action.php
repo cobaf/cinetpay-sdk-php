@@ -55,7 +55,7 @@ try {
         "customer_phone_number" => "0505050505",
         "customer_address" => "BP 258",
         "customer_city" => "ABIDJAN",
-        "customer_country" => "US",
+        "customer_country" => "CI",
         "customer_state" => "AZ",
         "customer_zip_code" => "00225"
     );
