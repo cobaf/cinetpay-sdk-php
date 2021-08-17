@@ -14,7 +14,7 @@ if (isset($_POST['payment_token'])) {
             die();
           }
           else {
-            header('Location: '.$commande->getCurrentUrl().'cinetpay-sdk-php/cinetpay-sdk-php');
+            header('Location: '.$commande->getCurrentUrl().'cinetpay-sdk-php/');
             echo 'Echec, votre paiement a échoué';
         }
  
@@ -22,6 +22,6 @@ if (isset($_POST['payment_token'])) {
         echo "Erreur :" . $e->getMessage();
     }
 } else {
-    header('Location: '.$commande->getCurrentUrl().'cinetpay-sdk-php/cinetpay-sdk-php');
+    header('Location: '.$commande->getCurrentUrl().'cinetpay-sdk-php/');
     die();
 }
