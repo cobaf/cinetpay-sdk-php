@@ -56,7 +56,7 @@ if (isset($_POST['cpm_trans_id'])) {
         } 
         // update transaction in our db
         $commande->update();
-        echo "1"; // a retirer
+        echo $message; // a retirer
     } catch (Exception $e) {
         echo "Erreur :" . $e->getMessage();
     }
