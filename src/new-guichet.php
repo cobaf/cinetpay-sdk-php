@@ -67,6 +67,7 @@
       public $chk_code = null;
       public $chk_message = null;
       public $chk_api_response_id = null;
+      public $chk_description = null;
       /**
      * CinetPay constructor.
      * @param $site_id
@@ -275,6 +276,7 @@
         $this->chk_code = $StatusPayment['code'];
         $this->chk_message = $StatusPayment['message'];
         $this->chk_api_response_id = $StatusPayment['api_response_id'];
+        $this->chk_description = $StatusPayment['description'];
       }
       private function getPayStatusArray()
        {
