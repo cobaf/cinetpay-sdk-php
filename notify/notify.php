@@ -1,34 +1,34 @@
 
 <?php 
-//check if there is a cinetpay post value
 if (isset($_POST['cpm_trans_id'])) {
     try {
-    // call required lib
+    
     require_once __DIR__ . '/../src/new-guichet.php';
-
-    // sample class for simulate payment validation
     require_once __DIR__ . '/../commande.php';
 
-    $commande = new Commande();
-        // cinetpay class initialisation and transaction identify
+        //La classe commande correspond à votre colonne qui gère les transactions dans votre base de données
+        $commande = new Commande();
+        // Initialisation de CinetPay et Identification du paiement
         $id_transaction = $_POST['cpm_trans_id'];
-        // enter apiKey
+        // apiKey
         $apikey = "12912847765bc0db748fdd44.40081707";
-        //enter siteId
+        // siteId
         $site_id = "445160";
         //version 
         $version = "V2";
 
         $CinetPay = new CinetPay($site_id, $apikey, $version);
-        // get actual transaction's status in your db
+        //On recupère le statut de la transaction dans la base de donnée
         $commande->set_transactionId($id_transaction);
-        $commande->getCommandeByTransId();
-        // check if transaction is already validated
+        $commande->getCommandeByTransId();//Il faut s'assurer que la transaction existe dans notre base de donnée
+
+        // On verifie que la commande n'a pas encore été traité
         if ($commande->get_statut() == '00') {
-            // transaction is already validated, don't do anything
+            // La commande a été déjà traité
+            // Arret du script
             die();
         }
-        // get correct values for this transactions
+        // Dans le cas contrait, on remplit notre ligne des nouvelles données acquise en cas de tentative de paiement sur CinetPay
         $CinetPay->setTransId($id_transaction)->getPayStatus();
 
         $payment_date = $CinetPay->chk_payment_date;
@@ -38,25 +38,25 @@ if (isset($_POST['cpm_trans_id'])) {
         $code = $CinetPay->chk_code;
         $api_response_id = $CinetPay->chk_api_response_id;
 
-        // set news values in the class
+        
         $commande->set_prefix($phone_prefix);
         $commande->set_number($phone_number);
         $commande->set_datePaiement($payment_date);
         $commande->set_api_response_id($api_response_id);
         $commande->set_statut($code);
         $commande->set_transStatus($message);
-        // check if amount of transaction correspond of the amount in our db
+        // On verifie que le montant payé chez CinetPay correspond à notre montant en base de données pour cette transaction
         if ($code == '00') {
             // correct, we continue
              $commande->set_methode($CinetPay->chk_payment_method);
              $commande->set_operator_id($CinetPay->chk_operator_id);
             
         } else {
-            // transaction is not valid
+            // transaction n'est pas valide
         } 
-        // update transaction in our db
+        // mise à jour des transactions dans la base de donnée
         $commande->update();
-        echo $message; // a retirer
+        
     } catch (Exception $e) {
         echo "Erreur :" . $e->getMessage();
     }
