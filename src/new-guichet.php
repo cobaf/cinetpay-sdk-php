@@ -48,7 +48,7 @@
 
       //toute les variables 
       public $metadata = null;
-      public $alternative_currency = 'EUR';
+      public $alternative_currency = null;
       public $customer_email = null;
       public $customer_phone_number = null;
       public $customer_address = null;
@@ -62,12 +62,13 @@
       public $chk_payment_date = null;
       public $chk_operator_id = null;
       public $chk_payment_method = null;
-      public $chk_phone_number = null;
-      public $chk_phone_prefix = null;
       public $chk_code = null;
       public $chk_message = null;
       public $chk_api_response_id = null;
       public $chk_description = null;
+      public $chk_amount = null;
+      public $chk_currency = null;
+      public $chk_metadata = null;
       /**
      * CinetPay constructor.
      * @param $site_id
@@ -102,7 +103,7 @@
         if ($this->channels == "CREDIT_CARD"  )
         $this->checkDataExist($param, "paymentCard");
 
-      if (!empty($param['alternative_currency'])) $this->$alternative_currency = $param['alternative_currency'];
+      if (!empty($param['alternative_currency'])) $this->alternative_currency = $param['alternative_currency'];
       if (!empty($param['customer_email']))  $this->customer_email = $param['customer_email'];
       if (!empty($param['customer_phone_number']))  $this->customer_phone_number = $param['customer_phone_number'];
       if (!empty($param['customer_address']))  $this->customer_address = $param['customer_address'];
@@ -199,6 +200,7 @@
                       CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
                       CURLOPT_CUSTOMREQUEST => $method,
                       CURLOPT_POSTFIELDS => json_encode($params),
+                      CURLOPT_SSL_VERIFYPEER => 0,
                       CURLOPT_HTTPHEADER => array(
                           "content-type:application/json"
                       ),
@@ -271,12 +273,13 @@
         $this->chk_payment_date = $StatusPayment['data']['payment_date'];
         $this->chk_operator_id = $StatusPayment['data']['operator_id'];
         $this->chk_payment_method = $StatusPayment['data']['payment_method'];
-        $this->chk_phone_number = $StatusPayment['data']['phone_number'];
-        $this->chk_phone_prefix = $StatusPayment['data']['phone_prefix'];
+        $this->chk_amount = $StatusPayment['data']['amount'];
+        $this->chk_currency = $StatusPayment['data']['currency'];
         $this->chk_code = $StatusPayment['code'];
         $this->chk_message = $StatusPayment['message'];
         $this->chk_api_response_id = $StatusPayment['api_response_id'];
-        $this->chk_description = $StatusPayment['description'];
+        $this->chk_description = $StatusPayment['data']['description'];
+        $this->chk_metadata = $StatusPayment['data']['metadata'];
       }
       private function getPayStatusArray()
        {

@@ -1,12 +1,12 @@
 <?php
 
-if (isset($_POST['payment_token'])) {
+if (isset($_POST['transaction_id'])) {
     try {
     require_once __DIR__ . '/../commande.php';
     $commande = new Commande();
-        $payment_token = $_POST['payment_token'];
+          $id_transaction = $_POST['transaction_id'];
           // get buyer name in your db
-          $commande->set_payment_token($payment_token);
+          $commande->set_transactionId($id_transaction);
           $commande->getUserByPayment();
           // check if payment token is already validated
           if ($commande->get_statut() == '00') {
@@ -14,7 +14,7 @@ if (isset($_POST['payment_token'])) {
             die();
           }
           else {
-            header('Location: http://15.188.15.170/cinetpay-sdk-php/');
+            header('Location: '.$commande->getCurrentUrl().'cinetpay-sdk-php/');
             echo 'Echec, votre paiement a échoué';
         }
  
@@ -22,6 +22,6 @@ if (isset($_POST['payment_token'])) {
         echo "Erreur :" . $e->getMessage();
     }
 } else {
-    header('Location:http://15.188.15.170/cinetpay-sdk-php/');
+    header('Location:'.$commande->getCurrentUrl().'cinetpay-sdk-php/');
     die();
 }

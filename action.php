@@ -33,6 +33,7 @@ try {
     $version = "V2";
     //notify url
     $notify_url = $commande->getCurrentUrl().'cinetpay-sdk-php/notify/notify.php';//'http://cinetpay-sdk-php/notify';
+    //$notify_url = "https://webhook.site/a38f92c3-7304-4540-82af-db48f06d2000"; 
     //return url
     $return_url = $commande->getCurrentUrl().'cinetpay-sdk-php/return/return.php';//'http://cinetpay-sdk-php/return';
     //Channel list
@@ -49,6 +50,7 @@ try {
         "notify_url" => $notify_url,
         "return_url" => $return_url,
         "channels" => $channels,
+        "metadata" => "Ceci est le SDK PHP", // utiliser cette variable pour recevoir des informations personnalisés.
         //pour afficher le paiement par carte de credit
         "alternative_currency" => "EUR",
         "customer_email" => "test@cinetpay.com",
