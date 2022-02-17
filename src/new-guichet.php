@@ -248,9 +248,9 @@
         return $dataArray;
       }
       //get payStatus
-      public function getPayStatus()
+      public function getPayStatus($id_transaction,$site_id)
       {
-        $data = (array)$this->getPayStatusArray();
+        $data = (array)$this->getPayStatusArray($id_transaction,$site_id);
         
         $flux_json = $this->callCinetpayWsMethod($data, $this->BASE_URL."/check");
 
@@ -281,12 +281,12 @@
         $this->chk_description = $StatusPayment['data']['description'];
         $this->chk_metadata = $StatusPayment['data']['metadata'];
       }
-      private function getPayStatusArray()
+      private function getPayStatusArray($id_transaction,$site_id)
        {
           return $dataArray = array(
             'apikey' => $this->apikey,
-            'site_id' => $this->site_id,
-            'transaction_id' => $this->transaction_id);
+            'site_id' => $site_id,
+            'transaction_id' => $id_transaction);
 
        }
       //generate transId
@@ -298,7 +298,7 @@
         $timestamp = time();
         $parts = explode(' ', microtime());
         $id = ($timestamp + $parts[0] - strtotime('today 00:00')) * 10;
-        $id = sprintf('%06d', $id) . mt_rand(100, 9999);
+        $id = "SDK-PHP".sprintf('%06d', $id) . mt_rand(100, 9999);
 
         return $id;
       }
@@ -312,11 +312,6 @@
           return $this;
       }
 
-      public function setToken($token)
-      {
-          $this->token= $token;
-          return $this;
-      }
 
   }
 
